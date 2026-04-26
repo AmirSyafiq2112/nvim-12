@@ -12,6 +12,10 @@
       "rev": "12ddd182d9efbdc848b540f16484a583d52da0fb",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "matteblack.nvim": {
+      "rev": "a8a039f5d6189b28d76fa0221e64965efec7e996",
+      "src": "https://github.com/tahayvr/matteblack.nvim"
+    },
     "mini.completion": {
       "rev": "667d94669be66043123cac44e7c5d65a31657732",
       "src": "https://github.com/echasnovski/mini.completion"

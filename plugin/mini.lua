@@ -9,7 +9,7 @@ local win_config = function()
         width = width,
         row = math.floor(0.5 * (vim.o.lines - height)),
         col = math.floor(0.5 * (vim.o.columns - width)),
-        -- border = 'double'
+        border = 'rounded'
     }
 end
 
@@ -22,3 +22,4 @@ minipick.setup({
 -- mini icon
 require "mini.icons".setup()
 require "mini.completion".setup()
+

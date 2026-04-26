@@ -4,6 +4,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
 vim.opt.ignorecase = true
+vim.opt.fillchars = { eob = " "}
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4

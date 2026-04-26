@@ -19,7 +19,11 @@ vim.pack.add({
 	-- 	oil
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" }, --optional dependency
+    { src = "https://github.com/tahayvr/matteblack.nvim" },
 })
 
 require("mason").setup()
 require("mason-lspconfig").setup()
+require"matteblack".colorscheme()
+require("theme.mini-pick-matte")
+
