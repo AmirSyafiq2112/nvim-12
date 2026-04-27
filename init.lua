@@ -11,3 +11,7 @@ require('vim._core.ui2').enable({
 
 require('pack')
 require('core')
+
+vim.diagnostic.config({
+  virtual_text = true,
+})

@@ -4,7 +4,7 @@ require('mason-tool-installer').setup({
 		'stylua',
 		'intelephense',
 		'prettier',
-        'bacon',
-        'bacon-ls',
+		'bacon',
+		'bacon-ls',
 	}
 })

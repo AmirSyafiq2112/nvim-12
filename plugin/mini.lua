@@ -22,4 +22,5 @@ minipick.setup({
 -- mini icon
 require "mini.icons".setup()
 require "mini.completion".setup()
-
+require "mini.pairs".setup()
+require "mini.surround".setup()

@@ -1,8 +1,10 @@
 vim.pack.add({
 	-- mini
-	{ src = "https://github.com/echasnovski/mini.pick" },
-	{ src = "https://github.com/echasnovski/mini.icons" },
-	{ src = "https://github.com/echasnovski/mini.completion" },
+	{ src = "https://github.com/nvim-mini/mini.pick" },
+	{ src = "https://github.com/nvim-mini/mini.icons" },
+	{ src = "https://github.com/nvim-mini/mini.completion" },
+	{ src = "https://github.com/nvim-mini/mini.pairs" },
+	{ src = "https://github.com/nvim-mini/mini.surround" },
 
 	{ src = "https://github.com/mbbill/undotree" },
 
@@ -20,10 +22,22 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" }, --optional dependency
     { src = "https://github.com/tahayvr/matteblack.nvim" },
+
+    { src = 'https://github.com/nvim-tree/nvim-web-devicons'},
+    { src = 'https://github.com/nvim-lualine/lualine.nvim'  },
+
+    -- telescope
+    { src = 'https://github.com/nvim-lua/plenary.nvim' },
+    { src = 'https://github.com/nvim-telescope/telescope-fzf-native.nvim', build = 'make', opt = false },
+    { src = 'https://github.com/nvim-telescope/telescope.nvim' },
+
+    -- folke
+    { src = 'https://github.com/folke/flash.nvim' },
+
+    { src = 'https://github.com/j-hui/fidget.nvim' },
 })
 
 require("mason").setup()
 require("mason-lspconfig").setup()
-require"matteblack".colorscheme()
+require('fidget').setup()
 require("theme.mini-pick-matte")
-
