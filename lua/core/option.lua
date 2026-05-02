@@ -1,11 +1,11 @@
 vim.opt.termguicolors = true
-vim.cmd.colorscheme('catppuccin')
-vim.opt.clipboard = { 'unnamedplus' }
+vim.cmd.colorscheme("catppuccin")
+vim.opt.clipboard = { "unnamedplus" }
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
-vim.opt.fillchars = { eob = " "}
+vim.opt.fillchars = { eob = " " }
 vim.opt.iskeyword:append("-")
 
 vim.opt.tabstop = 4
