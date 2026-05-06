@@ -34,3 +34,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
     end,
 })
+
+-- require("gitgutter").setup({
+--     signs = {
+--         add = { color = "#32CD32" },
+--         delete = { color = "#FF5555" },
+--         change = { color = "#ffff00" },
+--     },
+-- })
