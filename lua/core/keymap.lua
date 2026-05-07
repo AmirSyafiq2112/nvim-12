@@ -83,10 +83,6 @@ end
 vim.keymap.set("n", "<C-j>", qf_next)
 vim.keymap.set("n", "<C-k>", qf_prev)
 vim.keymap.set("n", "q", qf_close)
-vim.keymap.set("n", "<leader>f", function()
-	vim.lsp.buf.format()
-end)
-
 -- toggle undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {
 	desc = "Toggle Undotree",

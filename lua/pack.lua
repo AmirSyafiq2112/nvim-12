@@ -1,7 +1,7 @@
 vim.pack.add({
 	-- treesitter
 	{
-		src = "nvim-treesitter/nvim-treesitter",
+		src = "https://github.com/nvim-treesitter/nvim-treesitter",
 		branch = "main",
 		build = ":TSUpdate",
 	},
@@ -21,6 +21,9 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+
+	-- formatter
+	{ src = "https://github.com/stevearc/conform.nvim" },
 
 	-- folding
 	{ src = "https://github.com/kevinhwang91/nvim-ufo" }, --enabled
@@ -48,6 +51,9 @@ vim.pack.add({
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 	{ src = "https://github.com/iamcco/markdown-preview.nvim" },
 
+	-- html
+	{ src = "https://github.com/windwp/nvim-ts-autotag" },
+
 	{ src = "https://github.com/wansmer/treesj" },
 	{ src = "https://github.com/abecodes/tabout.nvim" },
 
@@ -61,6 +67,14 @@ require("theme.mini-pick-matte")
 require("render-markdown").setup()
 require("treesj").setup()
 require("tabout").setup()
+require("nvim-ts-autotag").setup({
+	opts = {
+		-- Defaults
+		enable_close = true, -- Auto close tags
+		enable_rename = true, -- Auto rename pairs of tags
+		enable_close_on_slash = false, -- Auto close on trailing </
+	},
+})
 
 require("ibl").setup({
 	indent = {

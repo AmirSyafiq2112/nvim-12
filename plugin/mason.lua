@@ -7,15 +7,27 @@ require("mason").setup({
 
 require("mason-tool-installer").setup({
 	ensure_installed = {
-		-- Lua
+		--general
+		"prettier",
+		"prettierd",
+
+		-- lua
 		"lua_ls",
 		"luacheck",
 		"stylua",
+
+		-- php
 		"intelephense",
-		"prettier",
+
+		-- rust
 		"bacon",
 		"bacon-ls",
 		"rust-analyzer",
 		"marksman",
+
+		-- typescript
+		"vtsls",
+		-- "ts_ls",
+		"eslint",
 	},
 })
