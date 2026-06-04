@@ -16,6 +16,12 @@ vim.diagnostic.config({
 	virtual_text = true,
 })
 
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = args.buf })
+	end,
+})
+
 -- require("gitgutter").setup({
 --     signs = {
 --         add = { color = "#32CD32" },

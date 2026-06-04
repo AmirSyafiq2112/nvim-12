@@ -97,5 +97,6 @@ vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>")
 
 vim.keymap.set("n", "<leader>th", "<cmd>set invhlsearch<CR>", { desc = "Toggle hlsearch" })
 
--- test
-vim.keymap.set("n", "<leader>tf", "<cmd>PlenaryBustedFile %<CR>")
+-- buffer
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "[B]uffer [N]ext" })
+vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "[B]uffer [P]revious" })

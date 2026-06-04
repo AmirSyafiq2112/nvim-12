@@ -18,6 +18,7 @@ require("mason-tool-installer").setup({
 
 		-- php
 		"intelephense",
+		"blade-formatter",
 
 		-- rust
 		"bacon",

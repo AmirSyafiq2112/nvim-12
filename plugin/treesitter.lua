@@ -17,7 +17,7 @@ treesitter.install({
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "lua", "rust", "javascript", "jsx", "zig", "typescript", "typescriptreact" },
+	pattern = { "lua", "rust", "javascript", "jsx", "zig", "typescript", "typescriptreact", "php", "blade" },
 	callback = function()
 		-- syntax highlighting, provided by Neovim
 		vim.treesitter.start()

@@ -6,6 +6,7 @@ conform.setup({
 		-- rust = { "rustfmt", lsp_format = "fallback" },
 		-- Conform will run the first available formatter
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+		php = { "intelephense" },
 	},
 	default_format_opts = {
 		lsp_format = "fallback",
@@ -17,6 +18,6 @@ conform.setup({
 	notify_on_error = true,
 })
 
-vim.keymap.set("n", "<leader>f", function()
+vim.keymap.set("n", "<leader>fe", function()
 	conform.format()
-end)
+end, { desc = "[F]ormat [E]ditor" })

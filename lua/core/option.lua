@@ -6,7 +6,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
 vim.opt.fillchars = { eob = " " }
-vim.opt.iskeyword:append("-")
+-- vim.opt.iskeyword:append("-")
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -38,3 +38,6 @@ vim.opt.foldlevel = 99
 
 vim.opt.wildmenu = true
 vim.opt.wildmode = "longest:full,full"
+vim.o.winborder = "rounded"
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })

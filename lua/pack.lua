@@ -6,6 +6,10 @@ vim.pack.add({
 		build = ":TSUpdate",
 	},
 
+	-- completion
+	{ src = "https://github.com/saghen/blink.lib" },
+	{ src = "https://github.com/saghen/blink.cmp" },
+
 	-- mini
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.icons" },
@@ -87,3 +91,11 @@ require("ibl").setup({
 })
 
 -- require("markdown-preview").setup()
+
+local cmp = require("blink.cmp")
+cmp.build():wait(60000)
+cmp.setup({
+	signature = {
+		enabled = false,
+	},
+})
