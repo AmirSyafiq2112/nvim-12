@@ -62,6 +62,10 @@ vim.pack.add({
 	{ src = "https://github.com/abecodes/tabout.nvim" },
 
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
+
+	-- git
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/NeogitOrg/neogit" },
 })
 
 require("mason").setup()
