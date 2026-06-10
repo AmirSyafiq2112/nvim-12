@@ -21,9 +21,8 @@ minipick.setup({
 
 -- mini icon
 require("mini.icons").setup()
-require("mini.completion").setup({
-	delay = { signature = 1000000 },
-})
+-- NOTE: Completion is handled by blink.cmp in lua/pack.lua.
+-- Keeping mini.completion disabled avoids keymap/behavior conflicts.
 require("mini.pairs").setup()
 require("mini.surround").setup()
 
