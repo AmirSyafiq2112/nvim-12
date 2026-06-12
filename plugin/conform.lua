@@ -7,6 +7,7 @@ conform.setup({
 		-- Conform will run the first available formatter
 		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 		php = { "intelephense" },
+		blade = { "blade-formatter" },
 	},
 	default_format_opts = {
 		lsp_format = "fallback",

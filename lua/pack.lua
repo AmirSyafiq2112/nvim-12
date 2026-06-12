@@ -102,6 +102,12 @@ require("ibl").setup({
 local cmp = require("blink.cmp")
 cmp.build():wait(60000)
 cmp.setup({
+	keymap = {
+		preset = "default",
+		["<C-n>"] = { "select_next", "fallback_to_mappings" },
+		["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+		["<C-y>"] = { "select_and_accept", "fallback" },
+	},
 	signature = {
 		enabled = false,
 	},
