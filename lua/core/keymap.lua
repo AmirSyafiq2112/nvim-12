@@ -95,7 +95,8 @@ vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeFocus, {
 
 vim.keymap.set("n", "<leader>mp", "<cmd>MarkdownPreviewToggle<CR>")
 
-vim.keymap.set("n", "<leader>th", "<cmd>set invhlsearch<CR>", { desc = "Toggle hlsearch" })
+vim.keymap.set("n", "<leader>th", "<cmd>set invhlsearch<CR>", { desc = "[T]oggle [H]lsearch" })
+vim.keymap.set("n", "<leader>tw", "<cmd>set invwrap<CR>", { desc = "[T]oggle [W]rap" })
 
 -- buffer
 vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "[B]uffer [N]ext" })
