@@ -1,5 +1,9 @@
 vim.g.mapleader = " "
 
+-- Copilot: accept suggestions with Tab like VS Code
+vim.g.copilot_no_tab_map = true
+vim.keymap.set("i", "<Tab>", 'copilot#Accept("<Tab>")', { expr = true, silent = true })
+
 -- better behavior
 vim.keymap.set("x", "p", '"_dP', { desc = "Paste without yanking" })
 vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Paste without yanking" })

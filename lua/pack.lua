@@ -66,6 +66,9 @@ vim.pack.add({
 	-- git
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/NeogitOrg/neogit" },
+
+	-- copilot
+	{ src = "https://github.com/github/copilot.vim" },
 })
 
 require("mason").setup()
