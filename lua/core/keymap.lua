@@ -1,9 +1,5 @@
 vim.g.mapleader = " "
 
--- Copilot: accept suggestions with Tab like VS Code
-vim.g.copilot_no_tab_map = true
-vim.keymap.set("i", "<Tab>", 'copilot#Accept("<Tab>")', { expr = true, silent = true })
-
 -- better behavior
 vim.keymap.set("x", "p", '"_dP', { desc = "Paste without yanking" })
 vim.keymap.set({ "n", "v" }, "x", '"_x', { desc = "Paste without yanking" })
@@ -105,3 +101,19 @@ vim.keymap.set("n", "<leader>tw", "<cmd>set invwrap<CR>", { desc = "[T]oggle [W]
 -- buffer
 vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "[B]uffer [N]ext" })
 vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "[B]uffer [P]revious" })
+
+-- resize pane
+vim.keymap.set("n", "<C-h>", "<cmd>vertical resize -2<CR>", { desc = "Resize pane left" })
+vim.keymap.set("n", "<C-l>", "<cmd>vertical resize +2<CR>", { desc = "Resize pane right" })
+vim.keymap.set("n", "<C-j>", "<cmd>resize +2<CR>", { desc = "Resize pane down" })
+vim.keymap.set("n", "<C-k>", "<cmd>resize -2<CR>", { desc = "Resize pane up" })
+
+-- Copilot
+vim.g.copilot_no_tab_map = true
+vim.keymap.set("i", "<Tab>", 'copilot#Accept("<Tab>")', { expr = true, silent = true })
+vim.keymap.set("i", "<Right>", "copilot#AcceptWord()", { expr = true, silent = true })
+-- vim.keymap.set("i", "<M-l>", "copilot#AcceptLine()", { expr = true, silent = true })
+-- vim.keymap.set("i", "<M-]>", "copilot#Next()", { expr = true, silent = true })
+-- vim.keymap.set("i", "<M-[>", "copilot#Previous()", { expr = true, silent = true })
+
+vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
