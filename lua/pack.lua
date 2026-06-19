@@ -76,7 +76,6 @@ require("mason-lspconfig").setup()
 require("fidget").setup()
 require("theme.mini-pick-matte")
 require("render-markdown").setup()
-require("treesj").setup()
 require("tabout").setup()
 require("nvim-ts-autotag").setup({
 	opts = {
