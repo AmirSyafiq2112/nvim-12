@@ -1,5 +1,5 @@
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("nord")
 vim.opt.clipboard = { "unnamedplus" }
 vim.opt.signcolumn = "yes"
 vim.opt.number = true

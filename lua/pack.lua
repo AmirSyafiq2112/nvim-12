@@ -69,6 +69,12 @@ vim.pack.add({
 
 	-- copilot
 	{ src = "https://github.com/github/copilot.vim" },
+
+	-- colorscheme
+	{ src = "https://github.com/shaunsingh/nord.nvim" },
+
+	-- harpoon
+	{ src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 })
 
 require("mason").setup()
