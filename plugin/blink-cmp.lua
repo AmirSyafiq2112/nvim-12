@@ -9,6 +9,11 @@ require("blink.cmp").setup({
 	signature = {
 		enabled = false,
 	},
+	completion = {
+		trigger = {
+			prefetch_on_insert = false,
+		},
+	},
 	sources = {
 		default = { "lsp", "path", "buffer", "snippets", "minuet" },
 		providers = {
@@ -26,3 +31,5 @@ require("blink.cmp").setup({
 		},
 	},
 })
+
+require("blink.cmp").build():wait(60000)

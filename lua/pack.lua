@@ -103,5 +103,3 @@ require("ibl").setup({
 })
 
 -- require("markdown-preview").setup()
-
-require("blink.cmp").build():wait(60000)

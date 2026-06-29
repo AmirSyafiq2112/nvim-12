@@ -133,10 +133,6 @@
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
       "src": "https://github.com/stevearc/oil.nvim"
     },
-    "opencode.nvim": {
-      "rev": "97c90dd0936c9076cbe78d8f94c7a2d119509d2c",
-      "src": "https://github.com/nickjvandyke/opencode.nvim"
-    },
     "playground": {
       "rev": "ba48c6a62a280eefb7c85725b0915e021a1a0749",
       "src": "https://github.com/nvim-treesitter/playground"
