@@ -67,8 +67,8 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/NeogitOrg/neogit" },
 
-	-- copilot
-	{ src = "https://github.com/github/copilot.vim" },
+	-- ai completion
+	{ src = "https://github.com/milanglacier/minuet-ai.nvim" },
 
 	-- colorscheme
 	{ src = "https://github.com/shaunsingh/nord.nvim" },
@@ -104,16 +104,4 @@ require("ibl").setup({
 
 -- require("markdown-preview").setup()
 
-local cmp = require("blink.cmp")
-cmp.build():wait(60000)
-cmp.setup({
-	keymap = {
-		preset = "default",
-		["<C-n>"] = { "select_next", "fallback_to_mappings" },
-		["<C-p>"] = { "select_prev", "fallback_to_mappings" },
-		["<C-y>"] = { "select_and_accept", "fallback" },
-	},
-	signature = {
-		enabled = false,
-	},
-})
+require("blink.cmp").build():wait(60000)

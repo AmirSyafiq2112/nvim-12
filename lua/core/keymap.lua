@@ -108,12 +108,4 @@ vim.keymap.set("n", "<C-l>", "<cmd>vertical resize +2<CR>", { desc = "Resize pan
 vim.keymap.set("n", "<C-j>", "<cmd>resize +2<CR>", { desc = "Resize pane down" })
 vim.keymap.set("n", "<C-k>", "<cmd>resize -2<CR>", { desc = "Resize pane up" })
 
--- Copilot
-vim.g.copilot_no_tab_map = true
-vim.keymap.set("i", "<Tab>", 'copilot#Accept("<Tab>")', { expr = true, silent = true })
-vim.keymap.set("i", "<Right>", "copilot#AcceptWord()", { expr = true, silent = true })
--- vim.keymap.set("i", "<M-l>", "copilot#AcceptLine()", { expr = true, silent = true })
--- vim.keymap.set("i", "<M-]>", "copilot#Next()", { expr = true, silent = true })
--- vim.keymap.set("i", "<M-[>", "copilot#Previous()", { expr = true, silent = true })
-
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
