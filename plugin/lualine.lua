@@ -34,7 +34,21 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
+    lualine_c = {
+      function()
+        local filepath = vim.fn.expand('%:p')
+        if filepath == '' then return '' end
+        local grandparent = vim.fn.fnamemodify(filepath, ':h:h:t')
+        local parent = vim.fn.fnamemodify(filepath, ':h:t')
+        local filename = vim.fn.fnamemodify(filepath, ':t')
+        if grandparent ~= '' and parent ~= '' then
+          return grandparent .. '/' .. parent .. '/' .. filename
+        elseif parent ~= '' then
+          return parent .. '/' .. filename
+        end
+        return filename
+      end
+    },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
