@@ -20,3 +20,12 @@ local neogit = require("neogit")
 neogit.setup()
 
 vim.keymap.set("n", "<leader>ng", neogit.open, { desc = "Open [N]eo[G]it UI" })
+
+-- Neogit AI Commit
+require("neogit-ai-commit").setup({
+	api_key = vim.env.DEEPSEEK_API_KEY,
+	api_url = "https://api.deepseek.com/v1/chat/completions",
+	model = "deepseek-chat",
+})
+
+vim.keymap.set("n", "<leader>nac", "<cmd>NeogitAICommit<CR>", { desc = "[N]eogit [A]I [C]ommit" })

@@ -70,6 +70,9 @@ vim.pack.add({
 	-- ai completion
 	{ src = "https://github.com/milanglacier/minuet-ai.nvim" },
 
+	-- ai commit
+	{ src = "https://github.com/lululau/neogit-ai-commit.nvim" },
+
 	-- colorscheme
 	{ src = "https://github.com/shaunsingh/nord.nvim" },
 

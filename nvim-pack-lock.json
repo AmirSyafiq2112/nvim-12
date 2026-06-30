@@ -97,6 +97,10 @@
       "rev": "99326a1310fb2d616b455d2fd16d01bf00682f06",
       "src": "https://github.com/NeogitOrg/neogit"
     },
+    "neogit-ai-commit.nvim": {
+      "rev": "a8ed0b4153b08cf02d600527b02a96286e49d3b4",
+      "src": "https://github.com/lululau/neogit-ai-commit.nvim"
+    },
     "nord.nvim": {
       "rev": "80c1e5321505aeb22b7a9f23eb82f1e193c12470",
       "src": "https://github.com/shaunsingh/nord.nvim"

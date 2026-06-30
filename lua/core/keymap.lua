@@ -103,9 +103,9 @@ vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", { desc = "[B]uffer [N]ext" }
 vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", { desc = "[B]uffer [P]revious" })
 
 -- resize pane
-vim.keymap.set("n", "<C-h>", "<cmd>vertical resize -2<CR>", { desc = "Resize pane left" })
-vim.keymap.set("n", "<C-l>", "<cmd>vertical resize +2<CR>", { desc = "Resize pane right" })
-vim.keymap.set("n", "<C-j>", "<cmd>resize +2<CR>", { desc = "Resize pane down" })
-vim.keymap.set("n", "<C-k>", "<cmd>resize -2<CR>", { desc = "Resize pane up" })
+vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize pane left" })
+vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize pane right" })
+vim.keymap.set("n", "<C-Down>", "<cmd>resize +2<CR>", { desc = "Resize pane down" })
+vim.keymap.set("n", "<C-Up>", "<cmd>resize -2<CR>", { desc = "Resize pane up" })
 
 vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Exit insert mode" })
