@@ -75,9 +75,6 @@ vim.pack.add({
 
 	-- colorscheme
 	{ src = "https://github.com/shaunsingh/nord.nvim" },
-
-	-- harpoon
-	{ src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" },
 })
 
 require("mason").setup()
