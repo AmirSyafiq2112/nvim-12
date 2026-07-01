@@ -67,14 +67,19 @@ vim.pack.add({
 	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 	{ src = "https://github.com/NeogitOrg/neogit" },
 
-	-- ai completion
+	-- ai tools
 	{ src = "https://github.com/milanglacier/minuet-ai.nvim" },
-
-	-- ai commit
 	{ src = "https://github.com/lululau/neogit-ai-commit.nvim" },
+	{
+		src = "https://github.com/nickjvandyke/opencode.nvim",
+		version = vim.version.range("*"), -- Latest stable release
+	},
 
 	-- colorscheme
 	{ src = "https://github.com/shaunsingh/nord.nvim" },
+
+	-- utilities
+	{ src = "https://github.com/folke/snacks.nvim" },
 })
 
 require("mason").setup()

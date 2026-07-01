@@ -18,16 +18,16 @@ require("gitsigns").setup({
 local neogit = require("neogit")
 
 neogit.setup()
+require("theme.git-highlights").apply()
 
 vim.keymap.set("n", "<leader>ng", neogit.open, { desc = "Open [N]eo[G]it UI" })
 
 -- Neogit AI Commit
 require("neogit-ai-commit").setup({
-	-- openai_api_key = "sk-b1f731c28f36445aa1ed2a9ff1a5ba5d",
-	-- api_url = "https://api.openai.com/v1/chat/completions",
-	-- model = "gpt-3.5-turbo",
-	api_url = "https://api.deepseek.com/v1/chat/completions",
-	model = "deepseek-v4-flash",
+	api_url = "https://api.openai.com/v1/chat/completions",
+	model = "gpt-3.5-turbo",
+	-- api_url = "https://api.deepseek.com/v1/chat/completions",
+	-- model = "deepseek-v4-flash",
 })
 
 vim.keymap.set("n", "<leader>nac", "<cmd>NeogitAICommit<CR>", { desc = "[N]eogit [A]I [C]ommit" })

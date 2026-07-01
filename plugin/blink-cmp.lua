@@ -16,6 +16,9 @@ require("blink.cmp").setup({
 	},
 	sources = {
 		default = { "lsp", "path", "buffer", "snippets", "minuet" },
+		per_filetype = {
+			opencode_ask = { "lsp", "buffer" },
+		},
 		providers = {
 			minuet = {
 				name = "minuet",
@@ -27,6 +30,9 @@ require("blink.cmp").setup({
 					end
 					return items
 				end,
+			},
+			lsp = {
+				fallbacks = {},
 			},
 		},
 	},

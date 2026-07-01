@@ -1,5 +1,12 @@
 vim.opt.termguicolors = true
 vim.cmd.colorscheme("nord")
+
+require("theme.git-highlights").apply()
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "nord",
+	callback = require("theme.git-highlights").apply,
+})
+
 vim.opt.clipboard = { "unnamedplus" }
 vim.opt.signcolumn = "yes"
 vim.opt.number = true
