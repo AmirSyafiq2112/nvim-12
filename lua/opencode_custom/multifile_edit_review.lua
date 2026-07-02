@@ -5,6 +5,28 @@ vim.api.nvim_set_hl(0, "OpencodeReviewAccept", { fg = "#a6da95", bg = "NONE", de
 vim.api.nvim_set_hl(0, "OpencodeReviewReject", { fg = "#ed8796", bg = "NONE", default = true })
 
 local state = nil
+local pending_review = nil
+local quickmark_suspended = false
+
+local function suspend_quickmark()
+	local ok, quickmark = pcall(require, "quickmark")
+	if ok and quickmark.suspend then
+		quickmark.suspend("opencode")
+		quickmark_suspended = true
+	end
+end
+
+local function resume_quickmark()
+	if not quickmark_suspended then
+		return
+	end
+
+	quickmark_suspended = false
+	local ok, quickmark = pcall(require, "quickmark")
+	if ok and quickmark.resume then
+		quickmark.resume("opencode")
+	end
+end
 
 local function split_lines(text)
 	return vim.split(text or "", "\n", { plain = true })
@@ -63,7 +85,10 @@ local function parse_diff(diff, fallback_filepaths)
 	for _, path in ipairs(fallback_filepaths) do
 		table.insert(files, {
 			path = normalized_path(path),
-			lines = vim.list_extend({ "Could not split this patch by file. Showing the full edit diff.", "" }, vim.deepcopy(lines)),
+			lines = vim.list_extend(
+				{ "Could not split this patch by file. Showing the full edit diff.", "" },
+				vim.deepcopy(lines)
+			),
 		})
 	end
 
@@ -95,6 +120,8 @@ local function close_state(restore)
 	if old.original_win and vim.api.nvim_win_is_valid(old.original_win) then
 		vim.api.nvim_set_current_win(old.original_win)
 	end
+
+	resume_quickmark()
 end
 
 local function render_list()
@@ -156,10 +183,24 @@ local function render_list()
 	local accept_start = action_text:find("Accept", 1, true)
 	local reject_start = action_text:find("Reject", 1, true)
 	if accept_start then
-		vim.api.nvim_buf_add_highlight(state.list_buf, ns, "OpencodeReviewAccept", action_line - 1, accept_start - 1, accept_start + 5)
+		vim.api.nvim_buf_add_highlight(
+			state.list_buf,
+			ns,
+			"OpencodeReviewAccept",
+			action_line - 1,
+			accept_start - 1,
+			accept_start + 5
+		)
 	end
 	if reject_start then
-		vim.api.nvim_buf_add_highlight(state.list_buf, ns, "OpencodeReviewReject", action_line - 1, reject_start - 1, reject_start + 5)
+		vim.api.nvim_buf_add_highlight(
+			state.list_buf,
+			ns,
+			"OpencodeReviewReject",
+			action_line - 1,
+			reject_start - 1,
+			reject_start + 5
+		)
 	end
 end
 
@@ -226,6 +267,7 @@ local function confirm_action()
 
 	local permit = state.permit
 	local reply = state.action == "accept" and "once" or "reject"
+	pending_review = nil
 	close_state(true)
 	permit(reply)
 end
@@ -244,7 +286,12 @@ local function set_list_keymaps(buf)
 	vim.keymap.set("n", "l", function()
 		set_action("reject")
 	end, vim.tbl_extend("force", opts, { desc = "Select reject" }))
-	vim.keymap.set("n", "<CR>", confirm_action, vim.tbl_extend("force", opts, { desc = "Confirm OpenCode edit action" }))
+	vim.keymap.set(
+		"n",
+		"<CR>",
+		confirm_action,
+		vim.tbl_extend("force", opts, { desc = "Confirm OpenCode edit action" })
+	)
 	vim.keymap.set("n", "q", function()
 		close_state(true)
 	end, vim.tbl_extend("force", opts, { desc = "Close OpenCode edit review" }))
@@ -256,6 +303,7 @@ end
 ---@param opts { diff: string, filepaths: string[], permit: fun(reply: string) }
 function M.open(opts)
 	close_state(true)
+	pending_review = opts
 
 	local original_win = vim.api.nvim_get_current_win()
 	local original_buf = vim.api.nvim_get_current_buf()
@@ -264,11 +312,12 @@ function M.open(opts)
 		vim.notify("OpenCode edit request did not include diff content", vim.log.levels.WARN, { title = "opencode" })
 		return
 	end
+	suspend_quickmark()
 
 	local columns = vim.o.columns
 	local lines = vim.o.lines
 	local width = math.min(48, math.max(36, math.floor(columns * 0.28)))
-	local height = math.min(34, math.max(20, #files + 14))
+	local height = math.min(40, math.max(20, #files + 14))
 	local row = math.max(0, lines - height - 4)
 	local col = math.max(0, columns - width - 2)
 
@@ -312,7 +361,23 @@ function M.open(opts)
 end
 
 function M.close()
+	pending_review = nil
 	close_state(true)
+end
+
+function M.reopen()
+	if state and state.list_win and vim.api.nvim_win_is_valid(state.list_win) then
+		vim.api.nvim_set_current_win(state.list_win)
+		return true
+	end
+
+	if not pending_review then
+		vim.notify("No pending OpenCode edit review to reopen", vim.log.levels.INFO, { title = "opencode" })
+		return false
+	end
+
+	M.open(pending_review)
+	return true
 end
 
 return M

@@ -5,6 +5,7 @@ local MAX_MARKS = 5
 local display_buf = nil
 local display_win = nil
 local display_hidden_for_qf = false
+local display_hidden_for_opencode = false
 
 local function get_formatted_path(filepath)
 	local path = filepath:gsub("\\", "/")
@@ -43,6 +44,10 @@ end
 
 local function update_display()
 	close_display()
+
+	if display_hidden_for_opencode then
+		return
+	end
 
 	if #marks == 0 then
 		return
@@ -148,6 +153,26 @@ function M.remove_mark(idx)
 	end
 	table.remove(marks, idx)
 	update_display()
+end
+
+function M.suspend(reason)
+	if reason ~= "opencode" then
+		return
+	end
+
+	display_hidden_for_opencode = true
+	close_display()
+end
+
+function M.resume(reason)
+	if reason ~= "opencode" then
+		return
+	end
+
+	display_hidden_for_opencode = false
+	if not display_hidden_for_qf then
+		update_display()
+	end
 end
 
 function M.swap_marks()
@@ -285,7 +310,7 @@ function M.setup(opts)
 	vim.api.nvim_create_autocmd("VimResized", {
 		group = augroup,
 		callback = function()
-			if not display_hidden_for_qf then
+			if not display_hidden_for_qf and not display_hidden_for_opencode then
 				update_display()
 			end
 		end,
@@ -305,7 +330,7 @@ function M.setup(opts)
 	vim.api.nvim_create_autocmd("BufEnter", {
 		group = augroup,
 		callback = function()
-			if display_hidden_for_qf and #marks > 0 then
+			if display_hidden_for_qf and not display_hidden_for_opencode and #marks > 0 then
 				local qf_open = false
 				for _, win_id in ipairs(vim.api.nvim_list_wins()) do
 					local buf = vim.api.nvim_win_get_buf(win_id)
