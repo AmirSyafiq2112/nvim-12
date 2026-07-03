@@ -75,40 +75,64 @@ local function path_overlaps(left, right)
 end
 
 local function connect_latest_opencode_server()
-	require("opencode.server.discovery.process")
-		.get()
-		:next(function(processes)
+	local Promise = require("opencode.promise")
+
+	require("opencode.server.discovery")
+		.locally()
+		:next(function(servers)
 			local cwd = vim.fn.getcwd()
-			local candidates = vim.tbl_filter(function(process)
-				local process_cwd = vim.uv.fs_readlink("/proc/" .. process.pid .. "/cwd")
-				return process_cwd and path_overlaps(cwd, process_cwd)
-			end, processes)
+			local candidates = vim.tbl_filter(function(server)
+				return server.cwd and path_overlaps(cwd, server.cwd)
+			end, servers)
 
 			if #candidates == 0 then
 				return require("opencode.promise").reject("No OpenCode servers found with overlapping CWD")
 			end
 
-			table.sort(candidates, function(left, right)
-				local left_stat = vim.uv.fs_stat("/proc/" .. left.pid)
-				local right_stat = vim.uv.fs_stat("/proc/" .. right.pid)
-				local left_time = left_stat and left_stat.ctime.sec or 0
-				local right_time = right_stat and right_stat.ctime.sec or 0
-				return left_time > right_time
-			end)
+			if #candidates == 1 then
+				return candidates[1]
+			end
 
-			local process = candidates[1]
-			return require("opencode.server").new("http://localhost:" .. process.port):next(function(server)
-				server._opencode_process_id = process.pid
-				return server
+			return Promise.all(vim.tbl_map(function(server)
+				return server:get_sessions():catch(function()
+					return {}
+				end):next(function(sessions)
+					local latest_updated = 0
+					for _, session in ipairs(sessions) do
+						latest_updated = math.max(latest_updated, session.time and session.time.updated or 0)
+					end
+
+					return {
+						server = server,
+						latest_updated = latest_updated,
+					}
+				end)
+			end, candidates)):next(function(ranked_candidates)
+				table.sort(ranked_candidates, function(left, right)
+					if left.latest_updated == right.latest_updated then
+						return left.server.cwd < right.server.cwd
+					end
+					return left.latest_updated > right.latest_updated
+				end)
+
+				local best = ranked_candidates[1]
+				local tied_candidates = vim.tbl_filter(function(candidate)
+					return candidate.latest_updated == best.latest_updated
+				end, ranked_candidates)
+
+				if #tied_candidates == 1 then
+					return best.server
+				end
+
+				return require("opencode.ui.select_server").select_server(vim.tbl_map(function(candidate)
+					return candidate.server
+				end, tied_candidates))
 			end)
 		end)
 		:next(function(server)
 			return server:connect():next(function()
 				vim.notify(
-					("Connected to latest OpenCode: %s (pid %s)"):format(
-						server:display_name(),
-						server._opencode_process_id
-					),
+					("Connected to OpenCode: %s"):format(server:display_name()),
 					vim.log.levels.INFO,
 					{ title = "opencode" }
 				)
@@ -116,7 +140,7 @@ local function connect_latest_opencode_server()
 		end)
 		:catch(function(err)
 			vim.notify(
-				"Failed to connect to latest OpenCode: " .. tostring(err),
+				"Failed to connect to OpenCode: " .. tostring(err),
 				vim.log.levels.ERROR,
 				{ title = "opencode" }
 			)
@@ -125,7 +149,7 @@ end
 
 vim.api.nvim_create_user_command("OpencodeConnect", function()
 	connect_latest_opencode_server()
-end, { desc = "Connect Neovim to the latest local OpenCode server" })
+end, { desc = "Connect Neovim to a local OpenCode server matching the current CWD" })
 
 local opencode_event_debug = false
 vim.api.nvim_create_user_command("OpencodeEventDebug", function()
