@@ -74,6 +74,8 @@ vim.pack.add({
 		src = "https://github.com/nickjvandyke/opencode.nvim",
 		version = vim.version.range("*"), -- Latest stable release
 	},
+	{ src = "https://github.com/zbirenbaum/copilot.lua" },
+	{ src = "https://github.com/copilotlsp-nvim/copilot-lsp" },
 
 	-- colorscheme
 	{ src = "https://github.com/shaunsingh/nord.nvim" },

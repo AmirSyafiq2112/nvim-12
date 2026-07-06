@@ -71,18 +71,15 @@ local function qf_prev()
 	end
 end
 
-local function qf_close()
-	local qf = vim.fn.getqflist({ winid = 0 })
-	if qf.winid ~= 0 then
-		vim.cmd("cclose")
-	else
-		vim.cmd("normal! q")
-	end
-end
-
 vim.keymap.set("n", "<C-j>", qf_next)
 vim.keymap.set("n", "<C-k>", qf_prev)
-vim.keymap.set("n", "q", qf_close)
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function(args)
+		vim.keymap.set("n", "q", "<cmd>close<CR>", { buffer = args.buf, silent = true })
+	end,
+})
 -- toggle undo tree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, {
 	desc = "Toggle Undotree",
