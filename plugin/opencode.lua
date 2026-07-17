@@ -94,19 +94,22 @@ local function connect_latest_opencode_server()
 			end
 
 			return Promise.all(vim.tbl_map(function(server)
-				return server:get_sessions():catch(function()
-					return {}
-				end):next(function(sessions)
-					local latest_updated = 0
-					for _, session in ipairs(sessions) do
-						latest_updated = math.max(latest_updated, session.time and session.time.updated or 0)
-					end
+				return server
+					:get_sessions()
+					:catch(function()
+						return {}
+					end)
+					:next(function(sessions)
+						local latest_updated = 0
+						for _, session in ipairs(sessions) do
+							latest_updated = math.max(latest_updated, session.time and session.time.updated or 0)
+						end
 
-					return {
-						server = server,
-						latest_updated = latest_updated,
-					}
-				end)
+						return {
+							server = server,
+							latest_updated = latest_updated,
+						}
+					end)
 			end, candidates)):next(function(ranked_candidates)
 				table.sort(ranked_candidates, function(left, right)
 					if left.latest_updated == right.latest_updated then
@@ -139,17 +142,17 @@ local function connect_latest_opencode_server()
 			end)
 		end)
 		:catch(function(err)
-			vim.notify(
-				"Failed to connect to OpenCode: " .. tostring(err),
-				vim.log.levels.ERROR,
-				{ title = "opencode" }
-			)
+			vim.notify("Failed to connect to OpenCode: " .. tostring(err), vim.log.levels.ERROR, { title = "opencode" })
 		end)
 end
 
 vim.api.nvim_create_user_command("OpencodeConnect", function()
 	connect_latest_opencode_server()
 end, { desc = "Connect Neovim to a local OpenCode server matching the current CWD" })
+
+vim.keymap.set("n", "<leader>oc", function()
+	connect_latest_opencode_server()
+end, { desc = "[O]pencode [Connect]; OpencodeConnect" })
 
 local opencode_event_debug = false
 vim.api.nvim_create_user_command("OpencodeEventDebug", function()

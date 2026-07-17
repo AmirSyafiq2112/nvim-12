@@ -1,0 +1,36 @@
+{
+    "PHP dump and die here": {
+        "prefix": "ddh",
+        "body": [
+            "dd('here');"
+        ],
+        "description": "Dump and die here"
+    },
+	"PHP dump and die": {
+		"prefix": "dd",
+		"body": [
+			"dd(${1:\\$value});"
+		],
+		"description": "Dump and die"
+	},
+	"PHP public function": {
+		"prefix": "pubf",
+		"body": [
+			"public function ${1:name}(${2})",
+			"{",
+			"\t${0}",
+			"}"
+		],
+		"description": "Public function"
+	},
+	"PHP constructor": {
+		"prefix": "ctor",
+		"body": [
+			"public function __construct(${1})",
+			"{",
+			"\t${0}",
+			"}"
+		],
+		"description": "Constructor"
+	}
+}

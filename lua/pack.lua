@@ -82,6 +82,7 @@ vim.pack.add({
 
 	-- utilities
 	{ src = "https://github.com/folke/snacks.nvim" },
+	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 })
 
 require("mason").setup()

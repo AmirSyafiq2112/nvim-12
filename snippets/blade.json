@@ -1,0 +1,19 @@
+{
+    "layout": {
+        "prefix": "layout",
+        "body": [
+            "@extends('${1:layouts.app}')",
+            "",
+            "@push('styles')",
+            "@endpush",
+            "",
+            "@section('${2:content}')",
+            "    ${3}",
+            "@endsection",
+            "",
+            "@push('scripts')",
+            "@endpush"
+        ],
+        "description": "Blade layout template"
+    }
+}

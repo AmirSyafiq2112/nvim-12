@@ -21,6 +21,7 @@ cmp.setup({
 		per_filetype = {
 			opencode_ask = { "lsp", "buffer" },
 		},
+
 		providers = {
 			-- minuet = {
 			-- 	name = "minuet",
@@ -33,6 +34,13 @@ cmp.setup({
 			-- 		return items
 			-- 	end,
 			-- },
+			snippets = {
+				opts = {
+					search_paths = {
+						vim.fn.stdpath("config") .. "/snippets",
+					},
+				},
+			},
 			lsp = {
 				fallbacks = {},
 			},
